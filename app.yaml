@@ -1,0 +1,33 @@
+application: hci-class
+version: live
+runtime: python27
+api_version: 1
+threadsafe: yes
+
+handlers:
+
+- url: /assets
+  static_dir: assets
+
+- url: /index.html
+  static_files: index.html
+  upload: index.html
+
+- url: /index.js
+  static_files: index.js
+  upload: index.js
+
+- url: /index.css
+  static_files: index.css
+  upload: index.css
+
+- url: /favicon\.ico
+  static_files: favicon.ico
+  upload: favicon\.ico
+
+- url: .*
+  script: main.app
+
+libraries:
+- name: webapp2
+  version: "2.5.1"
