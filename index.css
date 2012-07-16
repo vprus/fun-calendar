@@ -1,0 +1,47 @@
+body {
+    padding-top: 60px;
+    padding-bottom: 40px;
+}
+
+div.prominent > .well {
+    border-color: #0000f5;
+    //box-shadow: 0px 0px 10px 3px #ffc40d;
+    //overflow: visible;
+}
+
+.modal2 {
+    position: relative;
+    z-index: 1050;
+}
+
+.popover {
+    position: absolute;
+    z-index: 1050;
+}
+
+.alert-transient {
+    position: fixed;
+    top: 40px;
+    left: 50%;
+}
+
+div#calendar-day td[class='fc-header-right'] {
+    display: none;
+}
+
+.error-message {
+    display: none;
+}
+
+.error .error-message {
+    display: block;
+}
+
+h2.out-of-time {
+    color: red;
+}
+
+h2.almost-out-of-time {
+    color: orange;
+}
+

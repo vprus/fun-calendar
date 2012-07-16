@@ -1,0 +1,386 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN">
+<!-- Copyright 2012 Vladimir Prus
+     This work is licensed under a Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License.
+     See http://creativecommons.org/licenses/by-nc-sa/3.0/
+-->
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Fun Calendar</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <!-- Le styles -->
+    <link href="assets/css/bootstrap.css" rel="stylesheet">
+    <link href="assets/css/bootstrap-responsive.css" rel="stylesheet">
+
+    <link rel='stylesheet' type='text/css' href='assets/css/fullcalendar.css' />
+    <link rel='stylesheet' type='text/css' href='assets/css/fullcalendar.print.css' media='print' />
+
+    <link rel='stylesheet' type='text/css' href='assets/css/timePicker.css' />
+
+    <link href="index.css" rel="stylesheet">
+
+    <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <!-- Le fav and touch icons -->
+    <link rel="shortcut icon" href="assets/ico/favicon.ico">
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="assets/ico/apple-touch-icon-144-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="assets/ico/apple-touch-icon-114-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="assets/ico/apple-touch-icon-72-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" href="assets/ico/apple-touch-icon-57-precomposed.png">
+ 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+    <script src='http://ajax.googleapis.com/ajax/libs/jqueryui/1.7.2/jquery-ui.min.js'></script>
+    <script type='text/javascript' src='assets/js/jquery.timePicker.js'></script>
+    <script type='text/javascript' src='assets/js/fullcalendar.min.js'></script>
+
+    <!-- <script type="text/javascript" src="assets/js/jquery.illuminate.0.7.js"></script> -->
+
+    <script type="text/javascript" src="index.js"></script>
+
+  </head>
+
+  <body>
+
+    <div class="navbar navbar-fixed-top" id="navbar">
+      <div class="navbar-inner">
+        <div class="container">
+          <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </a>
+          <a class="brand" href="#">Fun Calendar</a>
+          <div class="nav-collapse">
+            <ul class="nav pull-left">
+              <li class="active"><a href="#day" data-toggle="tab" id="day-link">Today</a></li>
+              <li><a href="#week" data-toggle="tab" id="week-link">Week</a></li>
+              <li><a href="#settings" data-toggle="tab">Settings</a></li>
+              <li><a href="#help" data-toggle="tab">Help</a></li>
+            </ul>
+
+            <ul class="nav pull-right">
+            </ul>
+          </div><!--/.nav-collapse -->
+        </div>
+      </div>
+    </div>
+
+    <div class="alert alert-success alert-transient" style="display: none" id="top-message">
+      The settings were saved.
+    </div>
+	
+    <div class="container">
+
+      <!-- Main hero unit for a primary marketing message or call to action -->
+      <!-- 
+      <div class="hero-unit" id="welcome">
+        <h1>Welcome!</h1>
+        <p>This is <a href="http://hci-class.org">HCI class</a> submission. If you are a fellow student, please read this before grading:</p>
+	<ul>
+	<li><p>There is no database backend for this application. All data is kept in your browser.</p></i>
+	<li><p>You can save data to local filesystem store by clicking &quot;Save&quot;. The data will be restored if you visit this page one the same machine using the same browser.</p></li>
+	</ul>
+        <p><a class="btn btn-primary btn-large" id="welcome-ok">OK</a></p>
+      </div> -->
+
+     <ul class="nav nav-pills" style="display: none">
+	<li class="active"><a href="#day" data-toggle="pill">Day</a>
+	<li><a href="#week" data-toggle="pill">Week</a>
+	<li style="float: right"><a href="#help" data-toggle="tab">Help</a>
+	<li style="float: right"><a href="#settings" data-toggle="tab">Settings</a>
+	<li style="float: right"><a href="#login" data-toggle="tab">Login</a>	
+     </ul>
+
+     <!--
+     <div class="alert">
+       <button class="close" data-dismiss="alert">×</button>
+       <strong>HCI class students!</strong> Please use modern browser with JavaScript enable to review this submission. It was tested using Chrome and Firefox on desktop, and iPad. No IE6, please.
+     </div> -->
+
+     <div class="tab-content">
+
+     <!-- The 'Day' tab -->
+
+     <div class="tab-pane active" id="day">
+
+
+        <!-- <i class="icon-question-sign" style="float:right"></i> -->
+
+	<div class="page-header"><h1>Today <small>How much time do you have for fun?</small></h1></div>
+	
+	<div class="row">
+	  <div id="have-fun-sidebar" class="span2" style="text-align: center">
+	    <div class="well">
+	      <h2 id="time">2:30</h2><p id="have-fun-subtext">for fun</p>
+       	      <button id="have-fun-button" type="button" class="btn btn-primary">Enjoy now</button>
+            </div>
+	    <div class="alert alert-info" style="text-align: left">The remaining time for fun is computed as the
+	      from from now until your bedtime configured in settings, minus any scheduled events.
+	    </div>
+	  </div>	  
+
+	  <div class="span10"><div class="well"><div id="calendar-day"></div>
+	  </div></div>
+        </div>
+
+     </div>
+
+
+     <div class="tab-pane" id="week">
+
+	<div class="page-header"><h1>Week <small>Review your plans</small></h1></div>
+
+	<div class="row">
+  	  <div class="span2"><div class="well">
+		<h2>Summary</h2>
+		<table class="table-condensed">
+		  <thead>
+		    <tr><th>Category</th><th>Plan</th></tr>
+		  </thead>
+		  <tbody>
+		    <tr><td>Work</td><td id="work-total">0</td></tr>
+		    <tr><td>Study</td><td id="study-total">0</td></tr>
+		    <tr><td>Fitness</td><td id="fitness-total">0</td></tr>
+		    <tr><td>Errands</td><td id="errands-total">0</td></tr>
+		  </tbody>
+		</table>
+	    </div>
+	    <div class="alert alert-info">
+	      <p>Use the summary above to make sure your plans for a week match your goals.
+	    </div>
+	    
+	  </div>
+          <div class="span10"><div class="well" style="clear:both"><div id="calendar"></div></div></div>
+        </div>
+
+	<!--
+				<div class="row">
+					<div class="span2" style="text-align: right">
+						<p>Work</p>
+						<p>Excercise</p>
+						<p>Commute</p>						
+					</div>
+					<div class="span2">
+						<p>40</p>
+						<p>6</p>
+						<p>10</p>
+					</div>
+				</div> -->
+	<!--  -->
+     </div>
+
+     <div class="tab-pane" id="login">
+
+	<div class="alert">
+		<button class="close" data-dismiss="alert">x</button>
+		<strong>Warning!</strong><p>Since this is navigational prototype, nothing here actually works.</p>
+	</div>
+
+     	<form class="form-horizontal well">
+		<fieldset>
+			<div class="control-group">
+				<label class="control-label" for="email">Email</label>
+				<div class="controls">
+					<input type="text" class="input-medium" id="email">
+				</div>
+			</div>
+			<div class="control-group">
+				<label class="control-label" for="password">Password</label>
+				<div class="controls">
+					<input type="text" class="input-medium" id="password">
+				</div>
+			</div>
+		</fieldset>
+
+		<div class="form-actions">
+		<button type="submit" class="btn btn-primary" id="login">Login</button>
+		<button type="button" class="btn" id="login-cancel">Cancel</button>	
+		</div>
+	</form>
+     </div>
+
+
+     <div class="tab-pane" id="settings">
+
+	<div class="page-header"><h1>Settings <small>Let me know you better!</small></h1></div>
+	
+	<div class="alert hide" id="no-local-storage">
+		<strong>Warning!</strong><p>Support for HTML5 local storage is missing in your browser, so all these settings will be forgotted as soon as close browser window.</p>
+	</div>
+	
+
+     	<form class="form-horizontal well">
+		<fieldset>
+		        <legend>Calendar <small>Access your Google Calendar</small></legend>
+			<div class="control-group">
+				<label class="control-label" for="email">Email</label>
+				<div class="controls">
+				  <div class="input-append">
+					<input type="text" class="input-mediuml" id="password" disabled="true">
+					<button class="btn" type="button" disabled="true">Authorize</button>
+					<a href="#" id="email-disabled">Disabled</a>
+				  </div>
+				</div>
+			</div>
+		</fieldset>
+
+		<fieldset>
+		        <legend>Habits <small>How does your typical day look?</small></legend>
+			<div class="control-group">
+				<label class="control-label" for="waketime-setting">I wake on</label>
+				<div class="controls">
+					<input type="text" class="input-small" id="waketime-setting">
+				</div>
+			</div>
+			<div class="control-group">
+				<label class="control-label" for="bedtime-setting">I go to bed on</label>
+				<div class="controls">
+					<input type="text" class="input-small" id="bedtime-setting">
+				</div>
+			</div>
+		</fieldset>
+
+		<fieldset>
+		        <legend>Commute <small>Set your addresses for automatic commute scheduling</small></legend>
+			<div class="control-group">
+				<label class="control-label" for="home-address-setting">Home address</label>
+				<div class="controls">
+					<input type="text" class="input-large" disabled="true" id="home-address-setting">
+					<a href="#" class="commute-disabled">Disabled</a>
+				</div>				
+			</div>
+			<div class="control-group">
+				<label class="control-label" for="work-address-setting">Work to home</label>
+				<div class="controls">
+					<input type="text" class="input-large" disabled="true" id="work-address">
+					<a href="#" class="commute-disabled">Disabled</a>
+				</div>
+			</div>
+		</fieldset>
+
+
+		<div class="form-actions">
+		<button type="button" class="btn btn-primary" id="settings-save">Save changes</button>
+		<button type="button" class="btn" id="settings-cancel">Cancel</button>	
+		</div>
+	</form>
+     </div>
+
+     <div class="tab-pane" id="help">
+
+        <div class="page-header"><h1>Help <small>You are not alone</small></h1></div>
+
+	<h2>About</h2>
+
+	<p>This application simplifies all the complexity of personal scheduling to a single number&mdash;the number of hours you have for having fun today. It tracks how many hours
+        your worked this week, remembers about your commute, knows when you need to go to sleep, all so that you can enjoy time away from computers knowing you won't regret it later.</p>
+	
+        <p>This is <a href="http://hci-class.org">HCI class</a> submission. If you are a fellow student, please note that:</p>
+	<ul>
+	<li><p>This is, presently, navigational prototype for assignment 3. Actual functionality to create and edit events, and to update time you have for fun is not implelemented.</p>
+        <li><p>It requires relatively modern graphical browser, like Chrome, or Firefox. It basically works on iPad, but some transitions are not optimal. It is very explicitly not meant for smartphones.</p>        
+	</ul>
+
+	<h2>Today</h2>
+
+	<p>The today screen shows your agenda for today and how much time you have free. You can click the &quot;Enjoy Now&quot; button when you feel like having fun, and the application will track and update remaining free time.</p>
+
+	<h2>Week</h2>
+
+	<p>The week screen shows a week calendar that you can use for a medium term planning. For each week it also shows planned time per category, and how much time do you have to work to meet your weekly goals.</p>
+
+     </div>
+
+     <div id="event-creator" class="modal hide">
+       <div class="modal-header">
+	 <button type="button" class="close" data-dismiss="modal">×</button>
+	 <h3>New event</h3>
+       </div>
+
+       <div class="modal-body">
+	 <form class="form-horizontal">
+	   <div class="control-group">
+	     <label class="control-label">Title</label>
+	     <div class="controls">
+	       <input type="text" class="input-large" id="event-create-title">
+	       <p class="help-block error-message">Please specify event title</p> 
+	     </div>
+	   </div>
+	   <div class="control-group">
+	     <label class="control-label">Category</label>
+	     <div class="controls">
+	       <ul class="nav nav-pills" id="event-create-category">
+		 <li class="active">
+		   <a href="#" data-toggle="pill" data-category-name="Work">Work</a>
+		 </li>
+		 <li><a href="#" data-toggle="pill" data-category-name="Study">Study</a></li>
+		 <li><a href="#" data-toggle="pill" data-category-name="Fitness">Fitness</a></li>
+		 <li><a href="#" data-toggle="pill" data-category-name="Errands">Errands</a></li>
+	       </ul>
+	     </div>
+	   </div>
+	 </form>
+	 
+       </div>
+       <div class="modal-footer">
+	 <a href="#" class="btn btn-primary" id="event-create">Create event</a>
+       </div>
+     </div>
+
+
+     <div id="event-editor" class="modal hide">
+       <div class="modal-header">
+	 <button type="button" class="close" data-dismiss="modal">×</button>
+	 <h3 id="event-editor-name">Event</h3>
+       </div>
+
+       <div class="modal-body">
+	 <p id="event-editor-times"></p>
+	 <ul class="nav nav-pills" id="event-editor-category">
+	   <li class="active">
+	     <a href="#" data-toggle="pill" data-category-name="Work">Work</a>
+	   </li>
+	   <li><a href="#" data-toggle="pill" data-category-name="Study">Study</a></li>
+	   <li><a href="#" data-toggle="pill" data-category-name="Fitness">Fitness</a></li>
+	   <li><a href="#" data-toggle="pill" data-category-name="Errands">Errands</a></li>
+	 </ul>
+       </div>
+       <div class="modal-footer">
+	 <a href="#" class="btn btn-primary" id="event-editor-save">Save changes</a>
+	 <a href="#" class="btn btn-danger" id="event-editor-delete" data-dismiss="modal">Delete</a>
+	 <a href="#" class="btn" data-dismiss="modal">Close</a>
+       </div>
+     </div>
+
+      <hr>
+
+      <footer>
+        <p>&copy; Vladimir Prus, 2012</p>
+	<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-sa/3.0/80x15.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/">Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License</a>.
+
+     </footer>
+
+    </div> <!-- /container -->
+
+    <!-- Le javascript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <!-- <script src="assets/js/jquery.js"></script> -->
+    <script src="assets/js/bootstrap-transition.js"></script>
+    <script src="assets/js/bootstrap-alert.js"></script>
+    <script src="assets/js/bootstrap-modal.js"></script>
+    <script src="assets/js/bootstrap-dropdown.js"></script>
+    <script src="assets/js/bootstrap-tab.js"></script>
+    <script src="assets/js/bootstrap-tooltip.js"></script>
+    <script src="assets/js/bootstrap-popover.js"></script>
+    <script src="assets/js/bootstrap-button.js"></script>
+    <script src="assets/js/bootstrap-collapse.js"></script>
+
+  </body>
+</html>
